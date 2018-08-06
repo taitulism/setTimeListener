@@ -6,8 +6,8 @@
 **DEFAULT BRANCH:** `develop`  
 
 ## setTimeListener
-Run your callback on a future timestamp/date.
-[Read about the meta-tick](#meta%20tick).
+Run your callback on a future timestamp/date.  
+Optionally, compansate delay ([read about the meta-tick](#meta%20tick)).
 
 ```js
 import config from 'setTimeListener';
@@ -21,16 +21,16 @@ const setTimeListener = config();
 const now = Date.now(); // e.g. 1553311000000
 const futureTime = now + 777;
 
-const abort = setTimeListener(futureTime, (target) => {
+const abort = setTimeListener(futureTime, (targetTime) => {
     console.log(Date.now()); // e.g. ~1553311000777
-    console.log(target);     // e.g.  1553311000777
+    console.log(targetTime); // e.g.  1553311000777
 });
 
 // ...OOPS!
 abort();
 ```
 
-## Basic Usage
+## Basic Setup
 ```js
 const setTimeListener = config();
 ```
@@ -42,7 +42,7 @@ const setTimeListener = config();
 const setTimeListener = config(true);
 ```
 
-## Use With Customized Meta-Tick
+## Customize Meta-Tick
 ```js
 const options = {
     metaTick: 50,
@@ -99,7 +99,7 @@ When a meta-tick is set during config another props named `threshold` is being i
 
 The meta-tick will be used only if the target timestamp is greater than the `threshold`. This is because if the target time is set to now + 30ms there is no value in setting a meta-tick 5ms later (considering the default metaTick = 25).
 
-In this case the callback will be set to `targetTime - timeMargin`.
+In this case the callback will be set to `timeLeft - timeMargin`.
 
 ## Time Margin
 This is another "safty" feature. Setting a `timeMargin` value means you are ok with your callback running `timeMargin` ms before target timestamp. The default is 2.
