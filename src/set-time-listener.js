@@ -1,11 +1,14 @@
-const { getMetaTickValues, getTimeLeft, runAt } = require('./methods');
+const { resolveOptions, runMetaTick } = require('./internal-functions');
+const { getTimeLeft, setTimeoutToTarget } = require('./utils');
+
+module.exports = timeEventEmitter;
 
 function timeEventEmitter (useMetaTick = false) {
     if (!useMetaTick) {
-        return runAt;
+        return setTimeoutToTarget;
     }
 
-    const {metaTick, timeMargin, threshold} = getMetaTickValues(useMetaTick);
+    const {metaTick, timeMargin, threshold} = resolveOptions(useMetaTick);
     
     return function setTimeEventListener(target, callback) {
         const timeLeft = getTimeLeft(target);
@@ -36,23 +39,3 @@ function timeEventEmitter (useMetaTick = false) {
         };
     };
 }
-
-function runMetaTick (target, metaTick, timeMargin, callback) {
-    const timeLeft = getTimeLeft(target);
-    const delay = metaTick - timeLeft;
-
-    let ms;
-
-    if (delay <= timeMargin) {
-        ms = timeLeft - timeMargin;
-    }
-    else {
-        ms = timeLeft - delay;
-    }
-
-    return setTimeout(() => {
-        callback(target);
-    }, ms);
-}
-
-module.exports = timeEventEmitter;

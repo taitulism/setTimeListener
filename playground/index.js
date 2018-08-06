@@ -1,9 +1,9 @@
-const timeEventEmitter = require('../index');
+const config = require('../index');
 
-const setTimeListener = timeEventEmitter(true);
-const target = Date.now() + 10000;
+const setTimeListener = config(true);
+const target = Date.now() + 5000;
 
-console.log('wait 10 seconds...');
+console.log('wait 5 seconds...');
 
 setTimeListener(target, () => {
     const now = Date.now();
