@@ -1,0 +1,26 @@
+{
+  "name": "set-time-listener",
+  "version": "0.0.0",
+  "description": "Run your callback on a future timestamp/date.",
+  "main": "index.js",
+  "dependencies": {
+    "chai": "^4.1.2",
+    "sinon": "^6.1.4"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  },
+  "scripts": {
+    "test": "mocha ./test --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taitulism/setTimeListener.git"
+  },
+  "author": "taitulism@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/taitulism/setTimeListener/issues"
+  },
+  "homepage": "https://github.com/taitulism/setTimeListener#readme"
+}
