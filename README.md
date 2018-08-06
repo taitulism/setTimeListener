@@ -91,3 +91,21 @@ Time Axis-->───┼─────|─*───|──┼──|───*
 
 */
 ```
+
+## Threshold
+When a meta-tick is set during config another props named `threshold` is being initiated as the meta-tick value times two (metaTick * 2). 
+
+> `threshold` is being dynamically set for you.
+
+The meta-tick will be used only if the target timestamp is greater than the `threshold`. This is because if the target time is set to now + 30ms there is no value in setting a meta-tick 5ms later (considering the default metaTick = 25).
+
+In this case the callback will be set to `targetTime - timeMargin`.
+
+## Time Margin
+This is another "safty" feature. Setting a `timeMargin` value means you are ok with your callback running `timeMargin` ms before target timestamp. The default is 2.
+
+If the time left to target time is less than or equal to `timeMargin`, your callback will be called immediately.
+
+Else if the time left to target time is less than or equal to `threshold`, your callback will be set to `timeMargin` ms before time.
+
+Else, set a meta-tick.
