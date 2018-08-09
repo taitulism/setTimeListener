@@ -5,7 +5,7 @@ export {setTimeListener, createTimeListener}
 
 // playground
 const setTimeoutAt = createTimeListener();
-const MS_TIME = 60000;
+const MS_TIME = 10000;
 const NOW = Date.now();
 
 const targetTime = NOW + MS_TIME;
@@ -18,11 +18,10 @@ setTimeListener(targetTime, () => {
 
 
 
+// runMulti(10, 1)
 
-
-
-function runMulti (times = 10, test = 'my') {
-    if (test === 'my') {
+function runMulti (times = 10, testMine = true) {
+    if (testMine) {
         for (let index = 0; index < times; index++) {
             const incTime = MS_TIME + (500 * index);
         
