@@ -1,9 +1,14 @@
-const {createTimeListener} = require('../index');
+const {setTimeListener, createTimeListener} = require('../dist/main');
 
-
-const setTimeListener = createTimeListener();
+const setTimeoutAt = createTimeListener();
 const MS_TIME = 60000;
 const NOW = Date.now();
+
+const targetTime = NOW + MS_TIME;
+
+setTimeListener(targetTime, () => {
+    logResults('setTimeListener', targetTime);
+})
 
 for (let index = 0; index < 10; index++) {
     const incTime = MS_TIME + (500 * index);
@@ -14,13 +19,13 @@ for (let index = 0; index < 10; index++) {
 function setTime (index, incTime) {
     const targetTime = NOW + incTime;
 
-    setTimeout(() => {
-        logResults(`setTimeout ${index}`, targetTime);
-    }, incTime);
+    // setTimeout(() => {
+    //     logResults(`setTimeout ${index}`, targetTime);
+    // }, incTime);
 
-    // setTimeListener(NOW + incTime, () => {
-    //     logResults(`setTimeListener ${index}`, targetTime);
-    // });
+    setTimeoutAt(NOW + incTime, () => {
+        logResults(`setTimeoutAt ${index}`, targetTime);
+    });
 }
 
 console.log('wait a minute...');

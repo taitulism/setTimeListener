@@ -1,7 +1,7 @@
-const { resolveOptions, getTimeoutCalc } = require('./internal-functions');
-const { getTimeLeft, setTimeoutToTarget } = require('./utils');
+import { resolveOptions, getTimeoutCalc } from './internal-functions';
+import { getTimeLeft } from './utils';
 
-module.exports = createTimeListener;
+export default createTimeListener;
 
 function createTimeListener (opts) {
     const {metaTick, timeMargin, threshold} = resolveOptions(opts);

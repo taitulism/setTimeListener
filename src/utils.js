@@ -1,3 +1,5 @@
+export {isNumber, getTimeLeft};
+
 function getTimeLeft (target) {
     return target - Date.now();
 }
@@ -12,8 +14,3 @@ function isNumber (val) {
 
     return true;
 }
-
-module.exports = {
-    isNumber,
-    getTimeLeft,
-};

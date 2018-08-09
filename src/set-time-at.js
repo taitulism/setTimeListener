@@ -1,12 +1,11 @@
 import { getTimeLeft } from './utils';
 
-export default setTimeListener;
+export default setTimeAt;
 
-function setTimeListener (target, callback) {
+function setTimeAt (target, callback) {
     const timeLeft = getTimeLeft(target);
-    
+
     return setTimeout(() => {
         callback(target);
     }, timeLeft);
 };
-

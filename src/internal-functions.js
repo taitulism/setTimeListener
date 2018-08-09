@@ -1,14 +1,11 @@
-const { isNumber, getTimeLeft } = require('./utils');
+import { isNumber, getTimeLeft } from './utils';
+
+export {getTimeoutCalc, resolveOptions};
 
 const DEFAULT_META_TICK = 25;
 const DEFAULT_THRESHOLD = DEFAULT_META_TICK * 2;
 const DEFAULT_TIME_MARGIN = 2;
 const DEFAULT_MAX_DELAY = 2;
-
-module.exports = {
-    getTimeoutCalc,
-    resolveOptions,
-};
 
 function getTimeoutCalc (metaTick, timeMargin) {
     return function calcTimeout (target) {
