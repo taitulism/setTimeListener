@@ -2,14 +2,6 @@ function getTimeLeft (target) {
     return target - Date.now();
 }
 
-function setTimeoutToTarget (target, callback) {
-    const timeLeft = getTimeLeft(target);
-
-    return setTimeout(() => {
-        callback(target);
-    }, timeLeft);
-}
-
 function isNumber (val) {
     if (typeof val !== 'number') return false;
 
@@ -24,5 +16,4 @@ function isNumber (val) {
 module.exports = {
     isNumber,
     getTimeLeft,
-    setTimeoutToTarget,
 };

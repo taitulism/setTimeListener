@@ -7,7 +7,7 @@
 
 ## setTimeListener
 Run your callback on a future timestamp/date.  
-Optionally, compansate delay ([read about the meta-tick](#meta%20tick)).
+Optionally, compensate delay ([read about the meta-tick](#meta%20tick)).
 
 ```js
 import config from 'setTimeListener';

@@ -3,36 +3,48 @@ const { isNumber, getTimeLeft } = require('./utils');
 const DEFAULT_META_TICK = 25;
 const DEFAULT_THRESHOLD = DEFAULT_META_TICK * 2;
 const DEFAULT_TIME_MARGIN = 2;
+const DEFAULT_MAX_DELAY = 2;
 
 module.exports = {
-    runMetaTick,
+    getTimeoutCalc,
     resolveOptions,
 };
 
-function runMetaTick (target, metaTick, timeMargin, callback) {
-    const timeLeft = getTimeLeft(target);
-    const delay = metaTick - timeLeft;
+function getTimeoutCalc (metaTick, timeMargin) {
+    return function calcTimeout (target) {
+        const timeLeft = getTimeLeft(target);
+        const delay = metaTick - timeLeft;
 
-    let ms;
+        if (delay <= timeMargin) {
+            // Miror the delay
+             return timeLeft - delay;
+        }
+        
+        return timeLeft - timeMargin;
 
-    if (delay <= timeMargin) {
-        ms = timeLeft - timeMargin;
-    }
-    else {
-        ms = timeLeft - delay;
-    }
-
-    return setTimeout(() => {
-        callback(target);
-    }, ms);
+        /*
+            EXAMPLE:
+            --------
+            Default metaTick = 25
+            Example delay = 7
+            User callback will be set to run 7 ms before target timestamp to compansate delay.
+            
+                             delay    (-12.5)     timeout
+                           ┌───────┐      │      ┌───────┐
+            Time Axis-->───┼─────|─*───|──┼──|───*─|─────┼───>
+                         -25   -20   -15   -10    -5     0
+                           │                             │
+                      (metaTick)                     (target)
+        */
+    };
 }
 
 function resolveOptions (opts) {
-    if (typeof opts === 'boolean') {
-        // using defaults
+    if (!opts) { // use defaults
         return {
             metaTick: DEFAULT_META_TICK,
             timeMargin: DEFAULT_TIME_MARGIN,
+            maxDelay: DEFAULT_MAX_DELAY,
             threshold: DEFAULT_THRESHOLD,
         };
     }
@@ -58,10 +70,14 @@ function resolveOptions (opts) {
         throw new Error(errMsg);
     }
 
+    const metaTick   = rawMetaTick || DEFAULT_META_TICK;
+    const timeMargin = rawTimeMargin || DEFAULT_TIME_MARGIN;
+    const threshold  = rawMetaTick ? rawMetaTick * 2 : DEFAULT_THRESHOLD;
+
     return {
-        metaTick: rawMetaTick || DEFAULT_META_TICK,
-        timeMargin: rawTimeMargin || DEFAULT_TIME_MARGIN,
-        threshold: rawMetaTick ? rawMetaTick * 2 : DEFAULT_THRESHOLD,
+        metaTick,
+        timeMargin,
+        threshold,
     };
 };
 
