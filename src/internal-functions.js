@@ -1,4 +1,4 @@
-import { isNumber, getTimeLeft } from './utils';
+import { isNumber, getTimeLeft, cLog } from './utils';
 
 export {getTimeoutCalc, resolveOptions};
 
@@ -7,12 +7,24 @@ const DEFAULT_THRESHOLD = DEFAULT_META_TICK * 2;
 const DEFAULT_TIME_MARGIN = 2;
 const DEFAULT_MAX_DELAY = 2;
 
-function getTimeoutCalc (metaTick, timeMargin) {
+// document.addEventListener("visibilitychange", function() {
+//     console.log( document.visibilityState );
+// });
+
+function getTimeoutCalc (metaTick, timeMargin, maxDelay) {
     return function calcTimeout (target) {
         const timeLeft = getTimeLeft(target);
-        const delay = metaTick - timeLeft;
+cLog('timeLeft', timeLeft)
+        if (timeLeft <= timeMargin) { // means a great delay 
+            return -1; // negative value means run the callback now (synchronously).
+        }
 
-        if (delay <= timeMargin) {
+        const delay = metaTick - timeLeft;
+cLog('delay', delay)
+
+        if (delay > maxDelay) {
+        }
+        if (delay <= maxDelay) {
             // Miror the delay
              return timeLeft - delay;
         }
@@ -54,26 +66,32 @@ function resolveOptions (opts) {
 
     const rawMetaTick   = opts.metaTick;
     const rawTimeMargin = opts.timeMargin;
+    const rawMaxDelay   = opts.maxDelay;
 
     if (rawMetaTick && !isNumber(rawMetaTick)) {
         const errMsg = getNotANumberErrorMsg('metaTick', rawMetaTick);
-
         throw new Error(errMsg);
     }
 
     if (rawTimeMargin && !isNumber(rawTimeMargin)) {
         const errMsg = getNotANumberErrorMsg('timeMargin', rawTimeMargin);
-
         throw new Error(errMsg);
     }
 
-    const metaTick   = rawMetaTick || DEFAULT_META_TICK;
+    if (rawMaxDelay && !isNumber(rawMaxDelay)) {
+        const errMsg = getNotANumberErrorMsg('maxDelay', rawMaxDelay);
+        throw new Error(errMsg);
+    }
+
+    const metaTick   = rawMetaTick   || DEFAULT_META_TICK;
     const timeMargin = rawTimeMargin || DEFAULT_TIME_MARGIN;
+    const maxDelay   = rawMaxDelay   || DEFAULT_MAX_DELAY;
     const threshold  = rawMetaTick ? rawMetaTick * 2 : DEFAULT_THRESHOLD;
 
     return {
         metaTick,
         timeMargin,
+        maxDelay,
         threshold,
     };
 };

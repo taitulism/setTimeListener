@@ -1,10 +1,13 @@
-import setTimeListener from './src/set-time-listener';
+// import setTimeListener from './src/set-time-listener';
 import createTimeListener from './src/create-time-listener';
 
-export {setTimeListener, createTimeListener}
+export {createTimeListener}
+// export {setTimeListener, createTimeListener}
 
-// playground
-const setTimeoutAt = createTimeListener();
+/**********************
+ * * * PLAYGROUND * * *
+ **********************/
+const setTimeListener = createTimeListener();
 const MS_TIME = 10000;
 const NOW = Date.now();
 

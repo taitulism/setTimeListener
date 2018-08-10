@@ -1,7 +1,9 @@
-export {isNumber, getTimeLeft};
+import getNow from './now';
 
-function getTimeLeft (target) {
-    return target - Date.now();
+export {isNumber, getTimeLeft, setImmediate, cLog};
+
+function getTimeLeft (target, now = Date.now()) {
+    return target - now;
 }
 
 function isNumber (val) {
@@ -13,4 +15,26 @@ function isNumber (val) {
     if (Number.isNaN(val)) return false;
 
     return true;
+}
+
+function setImmediate (callback) {
+    setTimeout(() => {
+        callback();
+    }, 0);
+}
+
+let cacheLogs = [];
+let cLogRef = null;
+
+function cLog (...args) {
+    cacheLogs.push(args);
+    
+    if (cLogRef) {
+        clearTimeout(cLogRef);
+    }
+
+    cLogRef = setTimeout(() => {
+        console.log(cacheLogs);
+        cacheLogs = [];
+    }, 2000);
 }
