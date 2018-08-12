@@ -1,4 +1,4 @@
-import { getTimeLeft, cLog, waitAndRun} from '../utils';
+import { getTimeLeft, waitAndRun} from '../utils';
 
 const META_TICK = 12;
 const TIME_MARGIN = 2;
@@ -76,7 +76,6 @@ class TimeEventEmitter {
     
     runMetaTick () {
         const ms = calcTimeout(this.target);
-        cLog('calcMs', ms)
 
         if (ms < ZERO) {
             this.runCallback();
@@ -120,18 +119,14 @@ class TimeEventEmitter {
     }
 }
 
-
-
 function calcTimeout (target) {
     const timeLeft = getTimeLeft(target);
-    cLog('timeLeft1', timeLeft)
 
     if (timeLeft <= MIN_TIME_LEFT) { // means a great delay 
         return TIME_PASSED; // negative value means run the callback now (synchronously).
     }
 
     const delay = META_TICK - timeLeft;
-    cLog('delay1', delay)
     
     if (delay <= TIME_MARGIN) {
         return timeLeft - TIME_MARGIN;
