@@ -1,6 +1,6 @@
 import getNow from './now';
 
-export {isNumber, getTimeLeft, setImmediate, cLog};
+export {isNumber, getTimeLeft, cLog, waitAndRun};
 
 function getTimeLeft (target, now = Date.now()) {
     return target - now;
@@ -17,10 +17,10 @@ function isNumber (val) {
     return true;
 }
 
-function setImmediate (callback) {
-    setTimeout(() => {
+function waitAndRun (ms, callback) {
+    return setTimeout(() => {
         callback();
-    }, 0);
+    }, ms);
 }
 
 let cacheLogs = [];

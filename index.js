@@ -1,5 +1,6 @@
 // import setTimeListener from './src/set-time-listener';
 import createTimeListener from './src/create-time-listener';
+import TimeEventEmitter from './src/TimeEventEmitter';
 
 export {createTimeListener}
 // export {setTimeListener, createTimeListener}
@@ -7,15 +8,15 @@ export {createTimeListener}
 /**********************
  * * * PLAYGROUND * * *
  **********************/
-const setTimeListener = createTimeListener();
+const tevem = new TimeEventEmitter();
 const MS_TIME = 10000;
 const NOW = Date.now();
 
 const targetTime = NOW + MS_TIME;
 
-console.log('wait a minute...');
+console.log(`wait ${MS_TIME}...`);
 
-setTimeListener(targetTime, () => {
+tevem.setTimeListener(targetTime, () => {
     logResults('setTimeListener', targetTime);
 })
 

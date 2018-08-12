@@ -43,27 +43,12 @@ function createTimeListener(opts) {
             ref = setTimeout(() => { // set 2000
                 const timeLeft2 = getTimeLeft(target);
                 const delay2 = 2000 - timeLeft2;
-
-                cLog('timeLeft2', timeLeft2)
-                cLog('delay2', delay2)
-                cLog('ms1', timeLeft2 - 1000 - delay2)
-
-                
-                if (delay2 > 50) { // blured tab. setTimeout is limited to ~1 per second.
-                    killSomeTime();
-                    killSomeTime();
-                }
-                
-                const ms1 = 200;
                 
                 ref = setTimeout(() => { // set 1000 - delay from 2000
                     const timeLeft1 = getTimeLeft(target);
                     const delay1 = 1000 - timeLeft1;
 
-                    cLog('timeLeft1', timeLeft1)
-                    
                     if (delay1 > 500) {
-                        killSomeTime();
                         callback(target);
                     }
                     else if (timeLeft1 < timeMargin) {
@@ -74,7 +59,7 @@ function createTimeListener(opts) {
                         cLog('ms25', timeLeft1 - metaTick)
                         
                     }
-                }, timeLeft2 - 1000 - delay2);
+                }, 1000 - delay2);
             }, timeLeft - 2000);
         }
 
@@ -111,18 +96,4 @@ function setMetaTick (target, callback, lastDelay) {
     ref = setTimeout(() => {
         callback(target);
     }, calcMs);
-}
-
-
-
-function killSomeTime() {
-    const start = performance.now()
-    let o = {}
-    for (let i = 0; i < 250000; i++) {
-        o['a' + i] = function () { }
-    }
-    o = {}
-    const end = performance.now()
-
-    console.log(end - start);
 }
