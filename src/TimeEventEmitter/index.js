@@ -35,7 +35,7 @@ class TimeEventEmitter {
         }
         else if (timeLeft <= META_THRESHOLD) {
             // A metaTick would be a overhead in this case. Use `timeMargin`.
-            this.setTimeoutPad(timeLeft);
+            this.setTimeoutWithPad(timeLeft);
         }
         else if (timeLeft <= ONE_SECOND_THRESHOLD) {
             // Use a metaTick
@@ -53,7 +53,7 @@ class TimeEventEmitter {
         this.resetProps();
     }
 
-    setTimeoutPad (timeLeft) {
+    setTimeoutWithPad (timeLeft) {
         const ms = timeLeft - TIME_MARGIN;
 
         this.ref = setTimeout(() => {
