@@ -1,28 +1,14 @@
-import getNow from './now';
-
-export {isNumber, getTimeLeft, cLog, waitAndRun};
+export {getTimeLeft, cLog};
 
 function getTimeLeft (target, now = Date.now()) {
     return target - now;
 }
 
-function isNumber (val) {
-    if (typeof val !== 'number') return false;
 
-    // typeof NaN === 'number'
-    // Number.isNaN() checks if the given value is itself a type NaN
-    // while window.isNaN() tries to convert the value into a number (e.g. `Number(val)`).
-    if (Number.isNaN(val)) return false;
-
-    return true;
-}
-
-function waitAndRun (ms, callback) {
-    return setTimeout(() => {
-        callback();
-    }, ms);
-}
-
+/**
+ * cLog is a simple async `console.log`
+ * Using `console.log` when debugging ms is causing a delay.
+ */
 let cacheLogs = [];
 let cLogRef = null;
 
