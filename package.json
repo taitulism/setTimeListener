@@ -4,7 +4,7 @@
   "description": "Run your callback on a future timestamp/date.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./test --watch"
+    "test": "mocha ./test"
   },
   "devDependencies": {
     "mocha": "^5.2.0",
