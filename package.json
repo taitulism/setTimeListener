@@ -4,8 +4,6 @@
   "description": "Run your callback on a future timestamp/date.",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
-    "start": "webpack-dev-server",
     "test": "mocha ./test --watch"
   },
   "devDependencies": {
