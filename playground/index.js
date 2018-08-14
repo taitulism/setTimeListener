@@ -1,8 +1,8 @@
-const setTimeListener = require('../');
+const setTimeListener = require('../set-time-listener');
 
 const START_TIME = 5555111100000;
 
-const MS_TIME = 10000;
+const MS_TIME = 2000;
 const NOW = Date.now();
 
 const targetTime = NOW + MS_TIME;
@@ -17,11 +17,12 @@ console.log(`wait ${MS_TIME}...`);
 //     logResults('setTimeout', targetTime);
 // }, MS_TIME);
 
+runMulti(20, 0) // setTimeout
+runMulti(20, 1) // setTimeListener
+runMulti(20, 0) // setTimeout
+runMulti(20, 1) // setTimeListener
 
-
-runMulti(10, 1)
-
-function runMulti (times = 10, testMine = true) {
+function runMulti (times = 30, testMine = true) {
     if (testMine) {
         for (let index = 0; index < times; index++) {
             const incTime = MS_TIME + (500 * index);
