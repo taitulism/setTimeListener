@@ -19,7 +19,7 @@ console.log(`wait ${MS_TIME}...`);
 
 
 
-runMulti(10, 0)
+runMulti(10, 1)
 
 function runMulti (times = 10, testMine = true) {
     if (testMine) {

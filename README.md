@@ -3,7 +3,7 @@
 **PROJECT STATUS:** Archived. Merged into Ticker.  
 
 ## setTimeListener
-Runs callback accurately on a future timestamp/date.  
+Runs a callback **accurately** on a future timestamp/date.
 
 
 ```js
@@ -19,4 +19,9 @@ const abort = setTimeListener(futureTime, () => {
 
 // ...OOPS!
 abort();
+```
+
+Test / Play / Benchmark:
+```sh
+$ npm run playground
 ```

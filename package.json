@@ -1,10 +1,10 @@
 {
   "name": "set-time-listener",
   "version": "0.0.0",
-  "description": "Run your callback on a future timestamp/date.",
+  "description": "Runs a callback *accurately* on a future timestamp/date..",
   "main": "index.js",
   "scripts": {
-    "play": "node ./playground/index.js"
+    "playground": "node ./playground/index.js"
   },
   "repository": {
     "type": "git",
