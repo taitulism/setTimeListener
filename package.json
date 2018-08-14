@@ -6,11 +6,7 @@
   "scripts": {
     "test": "mocha ./test"
   },
-  "devDependencies": {
-    "mocha": "^5.2.0",
-    "chai": "^4.1.2",
-    "sinon": "^6.1.4"
-  },
+  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/taitulism/setTimeListener.git"
