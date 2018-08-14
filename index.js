@@ -12,9 +12,9 @@ const targetTime = NOW + MS_TIME;
 
 console.log(`wait ${MS_TIME}...`);
 
-setTimeListener(targetTime, () => {
-    logResults('setTimeListener', targetTime);
-})
+// setTimeListener(targetTime, () => {
+//     logResults('setTimeListener', targetTime);
+// })
 
 // setTimeout(() => {
 //     logResults('setTimeout', targetTime);
@@ -22,7 +22,7 @@ setTimeListener(targetTime, () => {
 
 
 
-// runMulti(10, 1)
+runMulti(10, true)
 
 function runMulti (times = 10, testMine = true) {
     if (testMine) {
@@ -44,8 +44,8 @@ function runMulti (times = 10, testMine = true) {
 function setMyTimeout (index, incTime) {
     const targetTime = NOW + incTime;
 
-    setTimeoutAt(NOW + incTime, () => {
-        logResults(`setTimeoutAt ${index}`, targetTime);
+    setTimeListener(NOW + incTime, () => {
+        logResults(`setTimeListener ${index}`, targetTime);
     });
 }
 
