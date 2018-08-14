@@ -1,14 +1,12 @@
-import { getTimeLeft} from './utils';
-import {
-    META_TICK,
-    TIME_MARGIN,
-    META_THRESHOLD,
-    MIN_TIME_LEFT,
-    ZERO,
-    TIME_PASSED,
-} from './constants';
+// Default values
+const META_TICK = 12;
+const TIME_MARGIN = 2;
+const META_THRESHOLD = (META_TICK * 2) + TIME_MARGIN; // 26
+const MIN_TIME_LEFT = (META_TICK / 4); // 3
+const ZERO = 0;
+const TIME_PASSED = -1;
 
-export default setTimeListener;
+module.exports = setTimeListener;
 
 function setTimeListener (target, callback) {
     let ref;
@@ -79,4 +77,29 @@ function calcTimeout (target) {
     
     // Miror the delay
     return timeLeft - delay;
+}
+
+function getTimeLeft (target, now = Date.now()) {
+    return target - now;
+}
+
+
+/**
+ * cLog is a simple async `console.log`
+ * Using `console.log` when debugging ms is causing a delay.
+ */
+let cacheLogs = [];
+let cLogRef = null;
+
+function cLog (...args) {
+    cacheLogs.push(args);
+    
+    if (cLogRef) {
+        clearTimeout(cLogRef);
+    }
+
+    cLogRef = setTimeout(() => {
+        console.log(cacheLogs);
+        cacheLogs = [];
+    }, 2000);
 }

@@ -4,9 +4,8 @@
   "description": "Run your callback on a future timestamp/date.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./test"
+    "play": "node ./playground/index.js"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/taitulism/setTimeListener.git"

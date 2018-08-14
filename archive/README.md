@@ -80,7 +80,7 @@ A visual example:
 
 Default metaTick = 25
 Example delay = 7
-User callback will be set to run 7 ms before target timestamp to compansate delay.
+User callback will be set to run 7 ms before target timestamp to compensate delay.
 
                  delay    (-12.5)     timeout
                ┌───────┐      │      ┌───────┐
